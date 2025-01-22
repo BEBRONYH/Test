@@ -1,7 +1,6 @@
 import json
 import tkinter as tk
 from tkinter import ttk, messagebox
-from PIL import Image, ImageTk
 
 def get_training_program(age_group, course, weight_category, run_3km, run_100m, pull_ups):
     # Загрузка программ тренировок из файла JSON
@@ -32,28 +31,28 @@ def show_training_program():
     
     messagebox.showinfo("Ваша программа тренировок", training_program)
 
-def show_image():
-    image_window = tk.Toplevel(root)
-    image_window.title("Нормативы ССК")
-    img = Image.open("normatives.png")  # Убедитесь, что файл normatives.png находится в той же папке
-    img = img.resize((500, 500), Image.ANTIALIAS)
-    img = ImageTk.PhotoImage(img)
-    panel = tk.Label(image_window, image=img)
-    panel.image = img
-    panel.pack()
-
-# Создание основного окна
-root = tk.Tk()
-root.title("спортсмен росгвардии")
-
-# Главная страница
-ttk.Label(root, text="спортсмен росгвардии", font=("Helvetica", 24)).grid(column=0, row=0, columnspan=2, padx=10, pady=10)
-
-# Кнопка для подбора программы тренировок
-ttk.Button(root, text="Подбор программы тренировок", command=lambda: create_training_program_window()).grid(column=0, row=1, padx=10, pady=10)
-
-# Кнопка для открытия изображения с нормативами ССК
-ttk.Button(root, text="Нормативы ССК", command=show_image).grid(column=1, row=1, padx=10, pady=10)
+def show_normatives():
+    normatives_text = """
+    Нормативы ССК:
+    1. Бег на 3 км:
+       - Оценка 2: > 15 минут
+       - Оценка 3: 13-15 минут
+       - Оценка 4: 11-13 минут
+       - Оценка 5: < 11 минут
+    2. Бег на 100 м:
+       - Оценка 2: > 15 секунд
+       - Оценка 3: 13-15 секунд
+       - Оценка 4: 11-13 секунд
+       - Оценка 5: < 11 секунд
+    3. Подтягивания:
+       - Оценка 2: < 5 раз
+       - Оценка 3: 5-10 раз
+       - Оценка 4: 11-15 раз
+       - Оценка 5: > 15 раз
+    """
+    normatives_window = tk.Toplevel(root)
+    normatives_window.title("Нормативы ССК")
+    tk.Label(normatives_window, text=normatives_text, justify=tk.LEFT).pack(padx=10, pady=10)
 
 def create_training_program_window():
     training_program_window = tk.Toplevel(root)
@@ -86,6 +85,19 @@ def create_training_program_window():
 
     # Кнопка для получения программы тренировок
     ttk.Button(training_program_window, text="Получить программу тренировок", command=show_training_program).grid(column=0, row=6, columnspan=2, padx=10, pady=20)
+
+# Создание основного окна
+root = tk.Tk()
+root.title("спортсмен росгвардии")
+
+# Главная страница
+ttk.Label(root, text="спортсмен росгвардии", font=("Helvetica", 24)).grid(column=0, row=0, columnspan=2, padx=10, pady=10)
+
+# Кнопка для подбора программы тренировок
+ttk.Button(root, text="Подбор программы тренировок", command=create_training_program_window).grid(column=0, row=1, padx=10, pady=10)
+
+# Кнопка для открытия окна с нормативами ССК
+ttk.Button(root, text="Нормативы ССК", command=show_normatives).grid(column=1, row=1, padx=10, pady=10)
 
 # Создание переменных для хранения выбранных значений
 age_group_var = tk.StringVar()
