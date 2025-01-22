@@ -27,6 +27,11 @@ def show_training_program():
     run_100m = run_100m_var.get()
     pull_ups = pull_ups_var.get()
     
+    # Проверка на заполнение всех полей
+    if not age_group or not course or not weight_category or not run_3km or not run_100m or not pull_ups:
+        messagebox.showerror("Ошибка", "Пожалуйста, заполните все поля")
+        return
+    
     training_program = get_training_program(age_group, course, weight_category, run_3km, run_100m, pull_ups)
     
     messagebox.showinfo("Ваша программа тренировок", training_program)
