@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Спортсмен Росгвардии</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+        .result {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Спортсмен Росгвардии</h1>
+    <div class="form-group">
+        <button onclick="showNormatives()">Нормативы ССК</button>
+    </div>
+    <h2>Подбор программы тренировок</h2>
+    <div class="form-group">
+        <label for="ageGroup">Возрастная группа</label>
+        <select id="ageGroup">
+            <option value="16-17 лет">16-17 лет</option>
+            <option value="18-19 лет">18-19 лет</option>
+            <option value="19-20 лет">19-20 лет</option>
+            <option value="21-22 года">21-22 года</option>
+            <option value="23 и более лет">23 и более лет</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="course">Курс</label>
+        <select id="course">
+            <option value="1 курс">1 курс</option>
+            <option value="2 курс">2 курс</option>
+            <option value="3-5 курс">3-5 курс</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="weightCategory">Весовая категория</label>
+        <select id="weightCategory">
+            <option value="50-60 кг">50-60 кг</option>
+            <option value="61-70 кг">61-70 кг</option>
+            <option value="71-80 кг">71-80 кг</option>
+            <option value="81-90 кг">81-90 кг</option>
+            <option value="90 и более кг">90 и более кг</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="run3km">Оценка за бег на 3 км</label>
+        <select id="run3km">
+            <option value="оценка 2">оценка 2</option>
+            <option value="оценка 3">оценка 3</option>
+            <option value="оценка 4">оценка 4</option>
+            <option value="оценка 5">оценка 5</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="run100m">Оценка за бег на 100 м</label>
+        <select id="run100m">
+            <option value="оценка 2">оценка 2</option>
+            <option value="оценка 3">оценка 3</option>
+            <option value="оценка 4">оценка 4</option>
+            <option value="оценка 5">оценка 5</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="pullUps">Оценка за подтягивания</label>
+        <select id="pullUps">
+            <option value="оценка 2">оценка 2</option>
+            <option value="оценка 3">оценка 3</option>
+            <option value="оценка 4">оценка 4</option>
+            <option value="оценка 5">оценка 5</option>
+        </select>
+    </div>
+    <button onclick="showTrainingProgram()">Получить программу тренировок</button>
+    <div id="result" class="result"></div>
+
+    <script>
+        const programs = {
+            "16-17 лет": {
+                "1 курс": {
+                    "50-60 кг": {
+                        "3 км": {
+                            "оценка 2": "Легкая программа для бега на 3 км.",
+                            "оценка 3": "Средняя программа для бега на 3 км.",
+                            "оценка 4": "Интенсивная программа для бега на 3 км.",
+                            "оценка 5": "Продвинутая программа для бега на 3 км."
+                        },
+                        "100 м": {
+                            "оценка 2": "Легкая программа для бега на 100 м.",
+                            "оценка 3": "Средняя программа для бега на 100 м.",
+                            "оценка 4": "Интенсивная программа для бега на 100 м.",
+                            "оценка 5": "Продвинутая программа для бега на 100 м."
+                        },
+                        "подтягивания": {
+                            "оценка 2": "Легкая программа для подтягиваний.",
+                            "оценка 3": "Средняя программа для подтягиваний.",
+                            "оценка 4": "Интенсивная программа для подтягиваний.",
+                            "оценка 5": "Продвинутая программа для подтягиваний."
+                        }
+                    },
+                    "61-70 кг": {
+                        "3 км": {
+                            "оценка 2": "Средняя программа для улучшения выносливости на 3 км.",
+                            "оценка 3": "Средняя программа для улучшения выносливости на 3 км.",
+                            "оценка 4": "Интенсивная программа для повышения силы и скорости на 3 км.",
+                            "оценка 5": "Интенсивная программа для повышения силы и скорости на 3 км."
+                        },
+                        "100 м": {
+                            "оценка 2": "Средняя программа для улучшения выносливости на 100 м.",
+                            "оценка 3": "Средняя программа для улучшения выносливости на 100 м.",
+                            "оценка 4": "Интенсивная программа для повышения силы и скорости на 100 м.",
+                            "оценка 5": "Интенсивная программа для повышения силы и скорости на 100 м."
+                        },
+                        "подтягивания": {
+                            "оценка 2": "Средняя программа для улучшения выносливости в подтягиваниях.",
+                            "оценка 3": "Средняя программа для улучшения выносливости в подтягиваниях.",
+                            "оценка 4": "Интенсивная программа для повышения силы и скорости в подтягиваниях.",
+                            "оценка 5": "Интенсивная программа для повышения силы и скорости в подтягиваниях."
+                        }
+                    }
+                }
+                // Добавьте аналогичные данные для других курсов и возрастных групп
+            },
+            // Добавьте аналогичные данные для других возрастных групп
+        };
+
+        function getTrainingProgram(ageGroup, course, weightCategory, run3km, run100m, pullUps) {
+            try {
+                const trainingProgram3km = programs[ageGroup][course][weightCategory]["3 км"][run3km];
+                const trainingProgram100m = programs[ageGroup][course][weightCategory]["100 м"][run100m];
+                const trainingProgramPullUps = programs[ageGroup][course][weightCategory]["подтягивания"][pullUps];
+
+                return `Программа тренировок на основе оценки за бег на 3 км: ${trainingProgram3km}<br>
+                        Программа тренировок на основе оценки за бег на 100 м: ${trainingProgram100m}<br>
+                        Программа тренировок на основе оценки за подтягивания: ${trainingProgramPullUps}`;
+            } catch (e) {
+                return "Персонализированная программа тренировок будет разработана на основе ваших данных.";
+            }
+        }
+
+        function showTrainingProgram() {
+            const ageGroup = document.getElementById('ageGroup').value;
+            const course = document.getElementById('course').value;
+            const weightCategory = document.getElementById('weightCategory').value;
+            const run3km = document.getElementById('run3km').value;
+            const run100m = document.getElementById('run100m').value;
+            const pullUps = document.getElementById('pullUps').value;
+
+            // Проверка на заполнение всех полей
+            if (!ageGroup || !course || !weightCategory || !run3km || !run100m || !pullUps) {
+                alert("Пожалуйста, заполните все поля");
+                return;
+            }
+
+            const trainingProgram = getTrainingProgram(ageGroup, course, weightCategory, run3km, run100m, pullUps);
+            document.getElementById('result').innerHTML = trainingProgram;
+        }
+
+        function showNormatives() {
+            const normativesText = `
+                <h2>Нормативы ССК</h2>
+                <p><strong>Бег на 3 км:</strong><br>
+                - Оценка 2: > 15 минут<br>
+                - Оценка 3: 13-15 минут<br>
+                - Оценка 4: 11-13 минут<br>
+                - Оценка 5: < 11 минут</p>
+                <p><strong>Бег на 100 м:</strong><br>
+                - Оценка 2: > 15 секунд<br>
+                - Оценка 3: 13-15 секунд<br>
+                - Оценка 4: 11-13 секунд<br>
+                - Оценка 5: < 11 секунд</p>
+                <p><strong>Подтягивания:</strong><br>
+                - Оценка 2: < 5 раз<br>
+                - Оценка 3: 5-10 раз<br>
+                - Оценка 4: 11-15 раз<br>
+                - Оценка 5: > 15 раз</p>
+            `;
+            const normativesWindow = window.open("", "Нормативы ССК", "width=600, height=400");
+            normativesWindow.document.write(normativesText);
+        }
+    </script>
+</body>
+</html>
